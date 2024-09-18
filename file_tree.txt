@@ -1,0 +1,38 @@
+.
+├── client/
+│   ├── public/
+│   │   ├── index.html
+│   │   └── favicon.ico
+│   ├── src/
+│   │   ├── components/
+│   │   │   ├── Login.js
+│   │   │   ├── MainDashboard.js
+│   │   │   ├── TrackNewDay.js
+│   │   │   ├── PositiveEmotions.js
+│   │   │   ├── NegativeEmotions.js
+│   │   │   └── Needs.js
+│   │   ├── App.js
+│   │   └── index.js
+│   ├── package.json
+│   └── README.md
+├── server/
+│   ├── config/
+│   │   └── db.js
+│   ├── controllers/
+│   │   ├── authController.js
+│   │   ├── emotionController.js
+│   │   └── needController.js
+│   ├── models/
+│   │   ├── User.js
+│   │   ├── DailyLog.js
+│   │   ├── Emotion.js
+│   │   └── Need.js
+│   ├── routes/
+│   │   ├── authRoutes.js
+│   │   ├── emotionRoutes.js
+│   │   └── needRoutes.js
+│   ├── app.js
+│   ├── package.json
+│   └── README.md
+├── .gitignore
+└── README.md
