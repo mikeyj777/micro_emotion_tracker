@@ -1,17 +1,17 @@
-// TrackNewDay.js
 import React from 'react';
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 
 function TrackNewDay() {
-  const history = useHistory();
+  const navigate = useNavigate();
 
   const handleFeelings = () => {
-    history.push('/positive-emotions');
+    navigate('/positive-emotions');
   };
 
   const handleNeeds = () => {
-    history.push('/needs');
+    navigate('/needs');
   };
+
 
   return (
     <div>

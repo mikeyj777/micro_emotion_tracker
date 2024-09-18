@@ -15,7 +15,8 @@
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.3.0",
     "react-scripts": "5.0.1",
-    "recharts": "^2.1.12"
+    "recharts": "^2.1.12",
+    "web-vitals": "^4.2.3"
   },
   "devDependencies": {
     "@testing-library/jest-dom": "^5.16.4",

@@ -2,11 +2,20 @@ from flask import Flask
 from controllers.user_controller import create_user
 from controllers.emotion_controller import get_emotions, create_emotion
 from controllers.need_controller import create_need
+from flask_cors import CORS
+
+import logging
+
+# Configure logging
+logging.basicConfig(level=logging.DEBUG, format='%(asctime)s - %(levelname)s - %(message)s')
+
 
 app = Flask(__name__)
+CORS(app)
 
 @app.route('/api/users', methods=['POST'])
 def user_route():
+    logging.info('logged in')
     return create_user()
 
 @app.route('/api/emotions/<int:user_id>', methods=['GET'])

@@ -1,7 +1,13 @@
 from flask import request, jsonify
 from config.db import get_db_connection
 
+import logging
+
+# Configure logging
+logging.basicConfig(level=logging.DEBUG, format='%(asctime)s - %(levelname)s - %(message)s')
+
 def create_user():
+    logging.info('CREATING USER!!!')
     data = request.get_json()
     name = data['name']
     try:

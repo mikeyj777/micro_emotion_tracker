@@ -1,28 +1,28 @@
-// MainDashboard.js
 import React, { useEffect, useState } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'recharts';
 
 function MainDashboard() {
   const [emotionData, setEmotionData] = useState([]);
   const [daysToView, setDaysToView] = useState(7);
-  const history = useHistory();
+  const navigate = useNavigate();
+  const { userId } = useParams();
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await axios.get(`/api/emotions?days=${daysToView}`);
+        const res = await axios.get(`/api/emotions/${userId}?days=${daysToView}`);
         setEmotionData(res.data);
       } catch (err) {
         console.error(err);
       }
     };
     fetchData();
-  }, [daysToView]);
+  }, [userId, daysToView]);
 
   const handleTrackNewDay = () => {
-    history.push('/track-new-day');
+    navigate('/track-new-day');
   };
 
   return (

@@ -1,11 +1,11 @@
-// NegativeEmotions.js
 import React, { useState } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
 
 function NegativeEmotions() {
   const [selectedEmotions, setSelectedEmotions] = useState([]);
-  const history = useHistory();
+  const navigate = useNavigate();
+  const { userId } = useParams();
 
   const handleEmotionSelect = (emotion) => {
     setSelectedEmotions((prevEmotions) => [...prevEmotions, emotion]);
@@ -13,20 +13,21 @@ function NegativeEmotions() {
 
   const handleNext = async () => {
     try {
-      await axios.post('/api/emotions', { emotions: selectedEmotions, type: 'negative' });
-      history.push('/track-new-day');
+      await axios.post(`/api/emotions/${userId}`, { emotions: selectedEmotions, type: 'negative' });
+      navigate('/track-new-day');
     } catch (err) {
       console.error(err);
     }
   };
 
   const handleSkip = () => {
-    history.push('/track-new-day');
+    navigate('/track-new-day');
   };
 
   const handleBack = () => {
-    history.push('/positive-emotions');
+    navigate('/positive-emotions');
   };
+
 
   return (
     <div>

@@ -1,17 +1,19 @@
-// Login.js
 import React, { useState } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import { API_BASE_URL } from '../config';
 
 function Login() {
+  
   const [name, setName] = useState('');
-  const history = useHistory();
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.post('/api/login', { name });
-      history.push('/dashboard');
+      const res = await axios.post(`${API_BASE_URL}/api/users`, { name });
+      const userId = res.data.userId;
+      navigate(`/dashboard/${userId}`);
     } catch (err) {
       console.error(err);
     }

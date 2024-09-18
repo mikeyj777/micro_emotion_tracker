@@ -1,11 +1,12 @@
 // Needs.js
 import React, { useState } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
 
 function Needs() {
   const [selectedNeeds, setSelectedNeeds] = useState([]);
-  const history = useHistory();
+  const navigate = useNavigate();
+  const { userId } = useParams();
 
   const handleNeedSelect = (need) => {
     setSelectedNeeds((prevNeeds) => [...prevNeeds, need]);
@@ -13,19 +14,19 @@ function Needs() {
 
   const handleNext = async () => {
     try {
-      await axios.post('/api/needs', { needs: selectedNeeds });
-      history.push('/track-new-day');
+      await axios.post(`/api/needs/${userId}`, { needs: selectedNeeds });
+      navigate('/track-new-day');
     } catch (err) {
       console.error(err);
     }
   };
 
   const handleSkip = () => {
-    history.push('/track-new-day');
+    navigate('/track-new-day');
   };
 
   const handleBack = () => {
-    history.push('/track-new-day');
+    navigate('/track-new-day');
   };
 
   return (
