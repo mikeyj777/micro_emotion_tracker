@@ -10,29 +10,22 @@
 │   │   │   ├── TrackNewDay.js
 │   │   │   ├── PositiveEmotions.js
 │   │   │   ├── NegativeEmotions.js
-│   │   │   └── Needs.js
+│   │   └── Needs.js
 │   │   ├── App.js
 │   │   └── index.js
 │   ├── package.json
 │   └── README.md
 ├── server/
 │   ├── config/
-│   │   └── db.js
+│   │   └── db.py
 │   ├── controllers/
-│   │   ├── authController.js
-│   │   ├── emotionController.js
-│   │   └── needController.js
+│   │   ├── user_controller.py
+│   │   ├── emotion_controller.py
+│   │   └── need_controller.py
 │   ├── models/
-│   │   ├── User.js
-│   │   ├── DailyLog.js
-│   │   ├── Emotion.js
-│   │   └── Need.js
-│   ├── routes/
-│   │   ├── authRoutes.js
-│   │   ├── emotionRoutes.js
-│   │   └── needRoutes.js
-│   ├── app.js
-│   ├── package.json
+│   │   └── models.py
+│   ├── app.py
+│   ├── requirements.txt
 │   └── README.md
 ├── .gitignore
 └── README.md
