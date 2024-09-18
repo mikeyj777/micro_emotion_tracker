@@ -1,0 +1,12 @@
+.custom-button {
+  background-color: blue;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  margin: 5px;
+  cursor: pointer;
+}
+
+.custom-button.selected {
+  background-color: purple;
+}
