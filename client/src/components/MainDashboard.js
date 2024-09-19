@@ -13,6 +13,7 @@ function MainDashboard() {
     const fetchData = async () => {
       try {
         const res = await axios.get(`/api/emotions/${userId}?days=${daysToView}`);
+        console.log('fetching res.data: ', res.data);
         setEmotionData(res.data);
       } catch (err) {
         console.error(err);
@@ -27,6 +28,7 @@ function MainDashboard() {
 
   return (
     <div>
+      {console.log('from return - emotionData: ', emotionData)}
       <button onClick={handleTrackNewDay}>Track New Day</button>
       <div>
         <LineChart width={600} height={300} data={emotionData}>
