@@ -19,7 +19,7 @@ def get_emotions(user_id):
                 SUM(CASE WHEN e.is_positive THEN 0 ELSE 1 END) AS "negativeCount"
             FROM daily_logs dl
             JOIN daily_emotions de ON dl.id = de.daily_log_id
-            JOIN emotions e ON de.emotion_id = e.id
+            JOIN emotions e ON de.emotion = e.name
             WHERE dl.user_id = %s
             GROUP BY date
             ORDER BY date DESC
