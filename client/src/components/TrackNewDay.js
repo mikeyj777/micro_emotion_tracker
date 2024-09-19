@@ -42,9 +42,9 @@ function TrackNewDay() {
           Warning: There is existing data for today. Any new data logged will overwrite the existing data.
         </div>
       )}
-      <button onClick={handleFeelings}>Log Feelings</button>
-      <button onClick={handleNeeds}>Log Needs</button>
-      <button onClick={handleHome}>Go Home</button>
+      <button onClick={handleFeelings} className="button button-primary">Log Feelings</button>
+      <button onClick={handleNeeds} className="button button-secondary">Log Needs</button>
+      <button onClick={handleHome} className="button button-secondary">Go Home</button>
     </div>
   );
 }

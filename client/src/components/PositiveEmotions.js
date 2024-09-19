@@ -58,8 +58,11 @@ function PositiveEmotions() {
   };
 
   return (
-    <div>
-      <h2>Positive Emotions</h2>
+    <div className="container">
+      <div className="header">
+        <h2 className="title">Positive Emotions</h2>
+        <p className="subtitle">Select the positive emotions you experienced today</p>
+      </div>
       {headers.map((header, index) => (
         <div key={index}>
           <h3>{header}</h3>
@@ -80,9 +83,11 @@ function PositiveEmotions() {
           })}
         </div>
       ))}
-      <button onClick={handleSubmit}>Submit</button>
-      <button onClick={handleSkip}>Skip</button>
-      <button onClick={handleBack}>Back</button>
+      <div className="button-group">
+        <button className="button button-primary" onClick={handleSubmit}>Submit</button>
+        <button className="button button-secondary" onClick={handleSkip}>Skip</button>
+        <button className="button button-secondary" onClick={handleBack}>Back</button>
+      </div>
     </div>
   );
 }

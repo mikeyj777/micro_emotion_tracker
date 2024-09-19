@@ -1,10 +1,10 @@
 import React from 'react';
-import '../styles/Button.css';
+import '../styles/CommonStyles.css';
 
 function Button({ children, onClick, isSelected }) {
   return (
     <button
-      className={`custom-button ${isSelected ? 'selected' : ''}`}
+      className={`button ${isSelected ? 'button-selected' : 'button-primary'}`}
       onClick={onClick}
     >
       {children}
