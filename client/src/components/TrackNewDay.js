@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { API_BASE_URL } from '../config';
+import '../styles/CommonStyles.css';
 
 function TrackNewDay() {
   const navigate = useNavigate();
@@ -36,15 +37,23 @@ function TrackNewDay() {
 
 
   return (
-    <div>
-      {hasExistingData && (
-        <div className="warning">
-          Warning: There is existing data for today. Any new data logged will overwrite the existing data.
+    <div className="gradient-layout">
+        <div className="gradient-layout-content">
+          <h1 className="gradient-layout-title">Mindful Moments</h1>
+          <p className="gradient-layout-subtitle">Select your path</p>
+          {hasExistingData && (
+            <div className="warning">
+              Warning: There is existing data for today. Any new data logged will overwrite the existing data.
+            </div>
+          )}
+          <div className="button-container">
+            <button onClick={handleFeelings} className="button button-primary">Log Feelings</button>
+            <button onClick={handleNeeds} className="button button-secondary">Log Needs</button>
+            <button onClick={handleHome} className="button button-secondary">Go Home</button>
+          </div>
         </div>
-      )}
-      <button onClick={handleFeelings} className="button button-primary">Log Feelings</button>
-      <button onClick={handleNeeds} className="button button-secondary">Log Needs</button>
-      <button onClick={handleHome} className="button button-secondary">Go Home</button>
+      
+      
     </div>
   );
 }

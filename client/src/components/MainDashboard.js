@@ -3,7 +3,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 import { API_BASE_URL } from '../config';
-import '../styles/MainDashboard.css';
+import '../styles/CommonStyles.css';
 
 const StatCard = ({ title, value, icon: Icon }) => (
   <div className="stat-card">
@@ -47,11 +47,11 @@ function MainDashboard() {
     : 0;
 
   return (
-    <div className="dashboard-container">
-      <header className="dashboard-header">
-        <h1 className="dashboard-title">Mindful Moments</h1>
-        <p className="dashboard-subtitle">Your daily path to emotional well-being</p>
-      </header>
+    <div className="gradient-layout">
+      <div className="gradient-layout-content">
+        <h1 className="gradient-layout-title">Mindful Moments</h1>
+        <p className="gradient-layout-subtitle">Your daily path to emotional well-being</p>
+        <button onClick={handleTrackNewDay} className="button button-primary">Start Your Journey</button>
       
       <div className="stats-row">
         <StatCard title="Total Emotions" value={totalEmotions} icon={() => <span className="icon">📊</span>} />
@@ -75,11 +75,9 @@ function MainDashboard() {
       </div>
       
       <div className="dashboard-controls">
-        <button onClick={handleTrackNewDay} className="button button-primary">
-          Track New Day
-        </button>
-        <button onClick={handleReturnToLogin} className="button button-secondary">
-          Return to Login
+        {/* <button onClick={handleTrackNewDay} className="button button-primary"> */}
+        <button onClick={handleReturnToLogin} className="button button-primary">
+          Login Again
         </button>
         <div className="days-input">
           <span className="days-label">Days to view:</span>
@@ -90,6 +88,7 @@ function MainDashboard() {
             className="days-input-field"
           />
         </div>
+      </div>
       </div>
     </div>
   );

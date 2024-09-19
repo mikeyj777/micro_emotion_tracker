@@ -26,17 +26,21 @@ function Login() {
   };
 
   return (
-    <div>
-      <h1>Login</h1>
-      <form onSubmit={handleSubmit}>
-        <input
-          type="text"
-          placeholder="Name"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-        />
-        <button type="submit">Login</button>
-      </form>
+    <div className="gradient-layout">
+      <div className="gradient-layout-content">
+        <h1 className="gradient-layout-title">Mindful Moments</h1>
+        <h2>Login</h2>
+        <form onSubmit={handleSubmit}>
+          <input
+            className="input-field"
+            type="text"
+            placeholder="Name"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+          />
+          <button className="button button-primary" type="submit">Login</button>
+        </form>
+      </div>
     </div>
   );
 }

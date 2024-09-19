@@ -1,3 +1,6 @@
+/* CommonStyles.css */
+
+/* Global Styles */
 html, body {
     margin: 0;
     padding: 0;
@@ -6,11 +9,90 @@ html, body {
   }
   
   body {
-    background-color: #f0fdf4;
     font-family: 'Arial', sans-serif;
   }
   
-  .container {
+  /* Gradient Layout Styles */
+  .gradient-layout {
+    min-height: 100vh;
+    background: linear-gradient(to bottom right, #6366f1, #8b5cf6, #ec4899);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .gradient-layout-content {
+    max-width: 960px;
+    width: 100%;
+    padding: 2rem;
+    background-color: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border-radius: 0.5rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  .gradient-layout-title {
+    font-size: 2.5rem;
+    font-weight: bold;
+    margin-bottom: 1rem;
+    color: #fff;
+  }
+  
+  .gradient-layout-subtitle {
+    font-size: 1.25rem;
+    color: #e0e7ff;
+    margin-bottom: 2rem;
+  }
+  
+  .button-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+
+  .button {
+    color: #6366f1;
+    padding: 0.75rem 1.5rem;
+    font-size: 1rem;
+    font-weight: 600;
+    border-radius: 0.5rem;
+    border: none;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s;
+    margin: 1.5rem;
+  }
+  
+  .button-primary {
+    background-color: #fff;
+    border: none;
+  }
+  
+  .button-primary:hover {
+    background-color: #f0f1f5;
+  }
+  
+  .button-secondary {
+    background-color: #e2e8f0;
+    border: 1px solid #cbd5e1;
+  }
+  
+  .button-secondary:hover {
+    background-color: #f0f1f5;
+  }
+  
+  .button-selected {
+    background-color: #6366f1;
+    color: #fff;
+  }
+
+  .button-emotion-need {
+    margin: 0.1rem;
+  }
+  
+  /* MainDashboard Styles */
+  .dashboard-container {
     width: 100%;
     margin: 0;
     padding: 0.5rem 2rem 2rem;
@@ -18,81 +100,90 @@ html, body {
     box-sizing: border-box;
   }
   
-  .header {
+  .dashboard-header {
     text-align: center;
     margin-bottom: 0.75rem;
   }
   
-  .title {
+  .dashboard-title {
     font-size: 2.5rem;
     color: #047857;
     margin-bottom: 0.125rem;
   }
   
-  .subtitle {
+  .dashboard-subtitle {
     font-size: 1rem;
     color: #059669;
     margin-top: 0;
   }
   
-  .button {
-    padding: 0.75rem 1.5rem;
-    border-radius: 0.375rem;
-    font-size: 1rem;
-    font-weight: 500;
-    cursor: pointer;
-    transition: background-color 0.2s;
-    margin:0.05rem;
-  }
-  
-  .button-primary {
-    background-color: #059669;
-    color: white;
-    border: none;
-  }
-  
-  .button-primary:hover {
-    background-color: #047857;
-  }
-  
-  .button-secondary {
-    background-color: #e2e8f0;
-    color: #1f2937;
-    border: 1px solid #cbd5e1;
-  }
-  
-  .button-secondary:hover {
-    background-color: #cbd5e1;
-  }
-  
-  .button-selected {
-    background-color: #69c0a7;
-    color: white;
-    border: none;
-  }
-  
-  .button-group {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 1rem;
-    margin-top: 3rem;
+  .stats-row {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.5rem;
     margin-bottom: 2rem;
-    justify-content: center;
   }
   
-  .input-group {
+  .stat-card {
+    background-color: #ecfdf5;
+    border-radius: 0.5rem;
+    padding: 1.5rem;
     display: flex;
     align-items: center;
-    gap: 0.5rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .stat-icon {
+    font-size: 2rem;
+    margin-right: 1rem;
+  }
+  
+  .stat-title {
+    font-size: 0.875rem;
+    color: #065f46;
+    margin-bottom: 0.25rem;
+  }
+  
+  .stat-value {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #047857;
+  }
+  
+  .chart-container {
+    background-color: #fff;
+    border-radius: 0.5rem;
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .chart-title {
+    font-size: 1.25rem;
+    color: #047857;
     margin-bottom: 1rem;
   }
   
-  .input-label {
+  .dashboard-controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+
+  .days-input {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  
+  .days-label {
     font-size: 0.875rem;
     color: #047857;
   }
   
-  .input-field {
+  .days-input-field {
     width: 4rem;
     padding: 0.375rem 0.5rem;
     border: 1px solid #10b981;
@@ -101,12 +192,55 @@ html, body {
     color: #047857;
   }
   
+  /* PositiveEmotions Styles */
+  .emotions-container {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 2rem;
+  }
+  
+  .emotions-title {
+    font-size: 2rem;
+    font-weight: bold;
+    margin-bottom: 1rem;
+    color: #fff;
+  }
+  
+  .emotions-subtitle {
+    font-size: 1.25rem;
+    color: #e0e7ff;
+    margin-bottom: 2rem;
+  }
+  
+  /* Input Text Field Styles */
+.input-field {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  font-size: 1rem;
+  color: #fff;
+  background-color: rgba(255, 255, 255, 0.2);
+  border: none;
+  border-radius: 0.5rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s;
+}
+
+.input-field::placeholder {
+  color: #e0e7ff;
+}
+
+.input-field:focus {
+  outline: none;
+  background-color: rgba(255, 255, 255, 0.3);
+}
+
+  /* Media Queries */
   @media (max-width: 768px) {
-    .container {
-      padding: 0.5rem 1rem 1rem;
+    .stats-row {
+      grid-template-columns: 1fr;
     }
   
-    .button-group {
+    .dashboard-controls {
       flex-direction: column;
       align-items: stretch;
     }

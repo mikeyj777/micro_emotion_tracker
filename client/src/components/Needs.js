@@ -57,8 +57,12 @@ function Needs() {
   };
 
   return (
-    <div>
-      <h2>Needs</h2>
+    <div className="gradient-layout">
+      <div className="gradient-layout-content">
+        <h1 className="gradient-layout-title">Mindful Moments</h1>
+        <h2 className="title">Needs</h2>
+        <p className="subtitle">Select any of the Needs that you Currently Resonate with</p>
+      </div>
       {headers.map((header, index) => (
         <div key={index}>
           <h3>{header}</h3>
@@ -79,9 +83,11 @@ function Needs() {
           })}
         </div>
       ))}
-      <button onClick={handleSubmit}>Submit</button>
-      <button onClick={handleSkip}>Skip</button>
-      <button onClick={handleBack}>Back</button>
+      <div className="button-group">
+        <button className="button button-primary" onClick={handleSubmit}>Submit</button>
+        <button className="button button-secondary" onClick={handleSkip}>Skip</button>
+        <button className="button button-secondary" onClick={handleBack}>Back</button>
+      </div>
     </div>
   );
 }

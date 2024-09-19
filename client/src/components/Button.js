@@ -4,7 +4,7 @@ import '../styles/CommonStyles.css';
 function Button({ children, onClick, isSelected }) {
   return (
     <button
-      className={`button ${isSelected ? 'button-selected' : 'button-primary'}`}
+      className={`button button-emotion-need ${isSelected ? 'button-selected' : 'button-primary'}`}
       onClick={onClick}
     >
       {children}

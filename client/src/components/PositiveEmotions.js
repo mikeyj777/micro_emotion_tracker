@@ -5,6 +5,7 @@ import feelingsData from '../data/feelings_positive.csv';
 import axios from 'axios';
 import Button from './Button';
 import { API_BASE_URL } from '../config';
+import '../styles/CommonStyles.css';
 
 function PositiveEmotions() {
   const navigate = useNavigate();
@@ -58,8 +59,9 @@ function PositiveEmotions() {
   };
 
   return (
-    <div className="container">
-      <div className="header">
+    <div className="gradient-layout">
+      <div className="gradient-layout-content">
+        <h1 className="gradient-layout-title">Mindful Moments</h1>
         <h2 className="title">Positive Emotions</h2>
         <p className="subtitle">Select the positive emotions you experienced today</p>
       </div>
