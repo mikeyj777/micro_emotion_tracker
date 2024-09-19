@@ -6,9 +6,15 @@ sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 from config.db import get_db_connection
 
+import csv
+from config.db import get_db_connection
+
 def parse_emotions_csv(file_path, is_positive):
     conn = get_db_connection()
     cur = conn.cursor()
+
+    # Clear all records from the emotions table
+    cur.execute("DELETE FROM emotions")
 
     with open(file_path, 'r') as file:
         reader = csv.DictReader(file)
