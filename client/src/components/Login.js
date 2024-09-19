@@ -11,8 +11,14 @@ function Login() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
+      if (!name) {
+        console.log('Please enter a name');
+        return;
+      } 
+        
       const res = await axios.post(`${API_BASE_URL}/api/users`, { name });
       const userId = res.data.userId;
+      localStorage.setItem('userId', userId);
       navigate(`/dashboard/${userId}`);
     } catch (err) {
       console.error(err);

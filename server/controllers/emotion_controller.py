@@ -1,6 +1,12 @@
 from flask import request, jsonify
 from config.db import get_db_connection
 
+import logging
+
+# Configure logging
+logging.basicConfig(level=logging.DEBUG, format='%(asctime)s - %(levelname)s - %(message)s')
+
+
 def get_emotions(user_id):
     days = request.args.get('days', 7)
     try:
@@ -34,27 +40,28 @@ def create_emotion(user_id):
     try:
         conn = get_db_connection()
         cur = conn.cursor()
+        logging.debug('about to insert into daily logs')
         cur.execute(
             "INSERT INTO daily_logs (user_id, date) VALUES (%s, CURRENT_DATE) RETURNING id",
             (user_id,)
         )
+        logging.debug('inserted into daily logs')
         daily_log_id = cur.fetchone()[0]
 
         for emotion in emotions:
+            logging.debug(f'emotion: {emotion}, emotion_type: {emotion_type}')
             cur.execute(
-                "SELECT id FROM emotions WHERE name = %s AND is_positive = %s",
-                (emotion, emotion_type == 'positive')
+                "INSERT INTO daily_emotions (daily_log_id, emotion, emotion_type) VALUES (%s, %s, %s)",
+                (daily_log_id, emotion, emotion_type)
             )
-            emotion_id = cur.fetchone()[0]
-            cur.execute(
-                "INSERT INTO daily_emotions (daily_log_id, emotion_id) VALUES (%s, %s)",
-                (daily_log_id, emotion_id)
+            logging.info(f'cur.execute(\
+                "INSERT INTO daily_emotions (daily_log_id, emotion, emotion_type) VALUES (%s, %s, %s)",\
+                {(daily_log_id, emotion, emotion_type,)})'
             )
-
         conn.commit()
         cur.close()
         conn.close()
         return jsonify({"message": "Emotions created successfully"}), 201
     except Exception as e:
-        print(e)
+        print("Error creating emotions:", str(e))
         return jsonify({"error": "Internal server error"}), 500

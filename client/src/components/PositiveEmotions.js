@@ -2,13 +2,16 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { csvParse } from 'd3-dsv';
 import feelingsData from '../data/feelings_positive.csv';
+import axios from 'axios';
 import Button from './Button';
+import { API_BASE_URL } from '../config';
 
 function PositiveEmotions() {
   const navigate = useNavigate();
   const [selectedEmotions, setSelectedEmotions] = useState([]);
   const [headers, setHeaders] = useState([]);
   const [feelings, setFeelings] = useState([]);
+  const userId = localStorage.getItem('userId');
 
   useEffect(() => {
     const fetchData = async () => {
@@ -27,7 +30,6 @@ function PositiveEmotions() {
   }, []);
 
   const handleEmotionSelect = (emotion) => {
-    console.log(selectedEmotions);
     if (selectedEmotions.includes(emotion)) {
       setSelectedEmotions(selectedEmotions.filter((e) => e !== emotion));
     } else {
@@ -37,10 +39,10 @@ function PositiveEmotions() {
 
   const handleSubmit = async () => {
     try {
-      // Perform any necessary actions with the selected emotions
-      console.log('Selected Emotions:', selectedEmotions);
-
-      // Navigate to the next page
+      await axios.post(`${API_BASE_URL}/api/emotions/${userId}`, {
+        emotions: selectedEmotions,
+        type: 'positive',
+      });
       navigate('/negative-emotions');
     } catch (error) {
       console.error('Error submitting positive emotions:', error);

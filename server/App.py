@@ -1,5 +1,5 @@
 from flask import Flask
-from controllers.user_controller import create_user
+from controllers.user_controller import get_user
 from controllers.emotion_controller import get_emotions, create_emotion
 from controllers.need_controller import create_need
 from flask_cors import CORS
@@ -16,7 +16,7 @@ CORS(app)
 @app.route('/api/users', methods=['POST'])
 def user_route():
     logging.info('logged in')
-    return create_user()
+    return get_user()
 
 @app.route('/api/emotions/<int:user_id>', methods=['GET'])
 def get_emotions_route(user_id):
