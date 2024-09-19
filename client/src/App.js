@@ -7,6 +7,7 @@ import TrackNewDay from './components/TrackNewDay';
 import PositiveEmotions from './components/PositiveEmotions';
 import NegativeEmotions from './components/NegativeEmotions';
 import Needs from './components/Needs';
+import './styles/App.css';
 
 function App() {
   return (
