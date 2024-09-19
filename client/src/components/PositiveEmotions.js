@@ -63,15 +63,21 @@ function PositiveEmotions() {
       {headers.map((header, index) => (
         <div key={index}>
           <h3>{header}</h3>
-          {feelings.map((row, rowIndex) => (
-            <Button
-              key={rowIndex}
-              onClick={() => handleEmotionSelect(row[header])}
-              isSelected={selectedEmotions.includes(row[header])}
-            >
-              {row[header]}
-            </Button>
-          ))}
+          {feelings.map((row, rowIndex) => {
+            const emotion = row[header];
+            if (emotion && emotion.trim() !== '') {
+              return (
+                <Button
+                  key={rowIndex}
+                  onClick={() => handleEmotionSelect(emotion)}
+                  isSelected={selectedEmotions.includes(emotion)}
+                >
+                  {emotion}
+                </Button>
+              );
+            }
+            return null;
+          })}
         </div>
       ))}
       <button onClick={handleSubmit}>Submit</button>

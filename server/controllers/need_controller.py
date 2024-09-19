@@ -7,6 +7,17 @@ def create_need(user_id):
     try:
         conn = get_db_connection()
         cur = conn.cursor()
+
+        # Check if the user exists in the users table
+        cur.execute("SELECT id FROM users WHERE id = %s", (user_id,))
+        user_exists = cur.fetchone()
+
+        if not user_exists:
+            # Handle the case when the user doesn't exist
+            # You can choose to create the user or return an error
+            # For example, you can return an error response
+            return jsonify({"error": "User not found"}), 404
+
         cur.execute(
             "INSERT INTO daily_logs (user_id, date) VALUES (%s, CURRENT_DATE) RETURNING id",
             (user_id,)
@@ -24,5 +35,5 @@ def create_need(user_id):
         conn.close()
         return jsonify({"message": "Needs created successfully"}), 201
     except Exception as e:
-        print(e)
+        print("Error creating needs:", str(e))
         return jsonify({"error": "Internal server error"}), 500

@@ -40,24 +40,18 @@ def create_emotion(user_id):
     try:
         conn = get_db_connection()
         cur = conn.cursor()
-        logging.debug('about to insert into daily logs')
         cur.execute(
             "INSERT INTO daily_logs (user_id, date) VALUES (%s, CURRENT_DATE) RETURNING id",
             (user_id,)
         )
-        logging.debug('inserted into daily logs')
         daily_log_id = cur.fetchone()[0]
 
         for emotion in emotions:
-            logging.debug(f'emotion: {emotion}, emotion_type: {emotion_type}')
             cur.execute(
                 "INSERT INTO daily_emotions (daily_log_id, emotion, emotion_type) VALUES (%s, %s, %s)",
                 (daily_log_id, emotion, emotion_type)
             )
-            logging.info(f'cur.execute(\
-                "INSERT INTO daily_emotions (daily_log_id, emotion, emotion_type) VALUES (%s, %s, %s)",\
-                {(daily_log_id, emotion, emotion_type,)})'
-            )
+            
         conn.commit()
         cur.close()
         conn.close()

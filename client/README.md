@@ -1,70 +1,73 @@
-# Getting Started with Create React App
+# Emotion Tracker Backend
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This is the backend server for the Emotion Tracker application.
 
-## Available Scripts
+## Requirements
 
-In the project directory, you can run:
+- Python 3.x
+- Flask
+- PostgreSQL
 
-### `npm start`
+## Installation
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+1. Clone the repository:
+   ```
+   git clone https://github.com/mikeyj777/micro_emotion_tracker.git
+   ```
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+Backend - Flask & PostgreSQL
 
-### `npm test`
+2. Navigate to the backend project directory:
+   ```
+   cd server
+   ```
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+3. Install the dependencies:
+   ```
+   pip install -r requirements.txt
+   ```
 
-### `npm run build`
+4. Set up the database:
+   - Create a new PostgreSQL database.
+   - Update the database connection details in `config/db.py`.
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+5. Start the server:
+   ```
+   python app.py
+   ```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+The backend server will start running on `http://localhost:5000`.
 
-### `npm run eject`
+Front end - React
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+6.  Navigate to front end project directory.
+    ```
+    cd client
+    ```
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+7.  Install the required react components and dependencies:
+    ```
+    npm install
+    ```
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+8.  Start the server:
+    ```
+    npm start
+    ```
+The frontend server will start running on `http://localhost:3000`.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+## API Endpoints
 
-## Learn More
+- `POST /api/users`: Create a new user.
+- `GET /api/emotions/<user_id>`: Get emotions for a user.
+- `POST /api/emotions/<user_id>`: Create emotions for a user.
+- `POST /api/needs/<user_id>`: Create needs for a user.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## Contributing
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+Contributions are welcome! If you find any issues or have suggestions for improvements, please open an issue or submit a pull request.
 
-### Code Splitting
+## License
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+This project is licensed under the [MIT License](LICENSE).
