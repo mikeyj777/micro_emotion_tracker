@@ -1,8 +1,19 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
-import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend } from 'recharts';
+import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 import { API_BASE_URL } from '../config';
+import '../styles/MainDashboard.css';
+
+const StatCard = ({ title, value, icon: Icon }) => (
+  <div className="stat-card">
+    <Icon className="stat-icon" />
+    <div>
+      <h3 className="stat-title">{title}</h3>
+      <p className="stat-value">{value}</p>
+    </div>
+  </div>
+);
 
 function MainDashboard() {
   const [emotionData, setEmotionData] = useState([]);
@@ -13,8 +24,7 @@ function MainDashboard() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await axios.get(`${API_BASE_URL}/api/emotions/${userId}?days=${daysToView}`);;
-        console.log('fetching res.data: ', res.data);
+        const res = await axios.get(`${API_BASE_URL}/api/emotions/${userId}?days=${daysToView}`);
         setEmotionData(res.data);
       } catch (err) {
         console.error(err);
@@ -31,27 +41,55 @@ function MainDashboard() {
     navigate('/');
   };
 
+  const totalEmotions = emotionData.reduce((acc, day) => acc + day.positiveCount + day.negativeCount, 0);
+  const positiveRatio = emotionData.length > 0
+    ? (emotionData.reduce((acc, day) => acc + day.positiveCount, 0) / totalEmotions * 100).toFixed(1)
+    : 0;
 
   return (
-    <div>
-      {console.log('from return - emotionData: ', emotionData)}
-      <button onClick={handleTrackNewDay}>Track New Day</button>
-      <button onClick={handleReturnToLogin}>Return to Login</button>
-      <div>
-        <LineChart width={600} height={300} data={emotionData}>
-          <XAxis dataKey="date" />
-          <YAxis />
-          <CartesianGrid strokeDasharray="3 3" />
-          <Tooltip />
-          <Legend />
-          <Line type="monotone" dataKey="positiveCount" stroke="#8884d8" activeDot={{ r: 8 }} />
-          <Line type="monotone" dataKey="negativeCount" stroke="#82ca9d" />
-        </LineChart>
-        <input
-          type="number"
-          value={daysToView}
-          onChange={(e) => setDaysToView(e.target.value)}
-        />
+    <div className="dashboard-container">
+      <header className="dashboard-header">
+        <h1 className="dashboard-title">Mindful Moments</h1>
+        <p className="dashboard-subtitle">Your daily path to emotional well-being</p>
+      </header>
+      
+      <div className="stats-row">
+        <StatCard title="Total Emotions" value={totalEmotions} icon={() => <span className="icon">📊</span>} />
+        <StatCard title="Positive Ratio" value={`${positiveRatio}%`} icon={() => <span className="icon">🌟</span>} />
+        <StatCard title="Days Tracked" value={emotionData.length} icon={() => <span className="icon">📅</span>} />
+      </div>
+      
+      <div className="chart-container">
+        <h2 className="chart-title">Emotion Trend</h2>
+        <ResponsiveContainer width="100%" height={300}>
+          <LineChart data={emotionData}>
+            <XAxis dataKey="date" stroke="#047857" />
+            <YAxis stroke="#047857" />
+            <CartesianGrid strokeDasharray="3 3" />
+            <Tooltip contentStyle={{ backgroundColor: '#f0fdf4', border: '1px solid #047857' }} />
+            <Legend />
+            <Line type="monotone" dataKey="positiveCount" name="Positive" stroke="#059669" strokeWidth={2} dot={{ fill: '#059669', strokeWidth: 2 }} />
+            <Line type="monotone" dataKey="negativeCount" name="Negative" stroke="#b91c1c" strokeWidth={2} dot={{ fill: '#b91c1c', strokeWidth: 2 }} />
+          </LineChart>
+        </ResponsiveContainer>
+      </div>
+      
+      <div className="dashboard-controls">
+        <button onClick={handleTrackNewDay} className="button button-primary">
+          Track New Day
+        </button>
+        <button onClick={handleReturnToLogin} className="button button-secondary">
+          Return to Login
+        </button>
+        <div className="days-input">
+          <span className="days-label">Days to view:</span>
+          <input
+            type="number"
+            value={daysToView}
+            onChange={(e) => setDaysToView(e.target.value)}
+            className="days-input-field"
+          />
+        </div>
       </div>
     </div>
   );

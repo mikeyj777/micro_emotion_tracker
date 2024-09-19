@@ -1,11 +1,10 @@
 from flask import request, jsonify
 from config.db import get_db_connection
-
 import logging
+from datetime import datetime
 
 # Configure logging
 logging.basicConfig(level=logging.DEBUG, format='%(asctime)s - %(levelname)s - %(message)s')
-
 
 def get_emotions(user_id):
     days = request.args.get('days', 7)
@@ -28,9 +27,19 @@ def get_emotions(user_id):
         emotions = cur.fetchall()
         cur.close()
         conn.close()
-        return jsonify(emotions)
+
+        # Format the data for the React component
+        formatted_emotions = []
+        for row in emotions:
+            formatted_emotions.append({
+                "date": row[0].strftime("%Y-%m-%d"),  # Format date as string
+                "positiveCount": row[1],
+                "negativeCount": row[2]
+            })
+
+        return jsonify(formatted_emotions)
     except Exception as e:
-        print(e)
+        logging.error(f"Error in get_emotions: {str(e)}")
         return jsonify({"error": "Internal server error"}), 500
 
 def create_emotion(user_id):

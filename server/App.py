@@ -22,7 +22,7 @@ def user_route():
 
 @app.route('/api/emotions/<int:user_id>', methods=['GET'])
 def get_emotions_route(user_id):
-    return get_emotions(user_id)
+    return get_emotions(user_id) 
 
 @app.route('/api/emotions/<int:user_id>', methods=['POST'])
 def create_emotion_route(user_id):
