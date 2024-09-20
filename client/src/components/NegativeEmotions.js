@@ -60,34 +60,42 @@ function NegativeEmotions() {
   return (
     <div className="gradient-layout">
       <div className="gradient-layout-content">
-        <h1 className="gradient-layout-title">Mindful Moments</h1>
-        <h2 className="title">Negative Emotions</h2>
-        <p className="subtitle">Select any negative emotions you may be experiencing today</p>
-      </div>
-      {headers.map((header, index) => (
-        <div key={index}>
-          <h3>{header}</h3>
-          {feelings.map((row, rowIndex) => {
-            const emotion = row[header];
-            if (emotion && emotion.trim() !== '') {
-              return (
-                <Button
-                  key={rowIndex}
-                  onClick={() => handleEmotionSelect(emotion)}
-                  isSelected={selectedEmotions.includes(emotion)}
-                >
-                  {emotion}
-                </Button>
-              );
-            }
-            return null;
-          })}
+        <div className="emotions-header">
+          <h1 className="gradient-layout-title">Mindful Moments</h1>
+          <h2 className="gradient-layout-subtitle">Negative Emotions</h2>
+          <p className="subtitle">Select any negative emotions you may be experiencing today</p>
         </div>
-      ))}
-      <div className="button-group">
-        <button className="button button-primary" onClick={handleSubmit}>Submit</button>
-        <button className="button button-secondary" onClick={handleSkip}>Skip</button>
-        <button className="button button-secondary" onClick={handleBack}>Back</button>
+
+          <div className="emotions-container">
+            {headers.map((header, index) => (
+              <div className="emotion-column" key={index}>
+                <h3>{header}</h3>
+                <div className="button-container">
+                  {feelings.map((row, rowIndex) => {
+                    const emotion = row[header];
+                    if (emotion && emotion.trim() !== '') {
+                      return (
+                        <Button
+                          key={rowIndex}
+                          onClick={() => handleEmotionSelect(emotion)}
+                          isSelected={selectedEmotions.includes(emotion)}
+                        >
+                          {emotion}
+                        </Button>
+                      );
+                    }
+                    return null;
+                  })}
+                </div>
+              </div>
+            ))}
+        </div>
+
+        <div className="navigation-buttons">
+          <button className="button button-primary" onClick={handleSubmit}>Submit</button>
+          <button className="button button-secondary" onClick={handleSkip}>Skip</button>
+          <button className="button button-secondary" onClick={handleBack}>Back</button>
+        </div>
       </div>
     </div>
   );
