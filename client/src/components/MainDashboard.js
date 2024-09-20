@@ -17,11 +17,13 @@ const StatCard = ({ title, value, icon: Icon }) => (
 
 function MainDashboard() {
   const [emotionData, setEmotionData] = useState([]);
+  const [needsData, setNeedsData] = useState([]);
   const [daysToView, setDaysToView] = useState(7);
   const navigate = useNavigate();
   const { userId } = useParams();
 
   useEffect(() => {
+    
     const fetchData = async () => {
       try {
         const res = await axios.get(`${API_BASE_URL}/api/emotions/${userId}?days=${daysToView}`);
@@ -32,6 +34,20 @@ function MainDashboard() {
     };
     fetchData();
   }, [userId, daysToView]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+    try {
+      console.log('about to fetch needs data')
+      const res = await axios.get(`${API_BASE_URL}/api/needs/${userId}?days=${daysToView}`);
+      console.log('got needs data: ' + res.data)
+      setNeedsData(res.data);
+    } catch (err) {
+      console.error(err);
+    }
+  };
+  fetchData();
+}, [userId, daysToView]);
 
   const handleTrackNewDay = () => {
     navigate('/track-new-day');
@@ -68,8 +84,22 @@ function MainDashboard() {
             <CartesianGrid strokeDasharray="3 3" />
             <Tooltip contentStyle={{ backgroundColor: '#f0fdf4', border: '1px solid #047857' }} />
             <Legend />
-            <Line type="monotone" dataKey="positiveCount" name="Positive" stroke="#059669" strokeWidth={2} dot={{ fill: '#059669', strokeWidth: 2 }} />
-            <Line type="monotone" dataKey="negativeCount" name="Negative" stroke="#b91c1c" strokeWidth={2} dot={{ fill: '#b91c1c', strokeWidth: 2 }} />
+            <Line type="monotone" dataKey="positiveCount" name="Positive" stroke="#E8489C" strokeWidth={2} dot={{ fill: '#E8489C', strokeWidth: 2 }} />
+            <Line type="monotone" dataKey="negativeCount" name="Negative" stroke="#6A65F2" strokeWidth={2} dot={{ fill: '#6A65F2', strokeWidth: 2 }} />
+          </LineChart>
+        </ResponsiveContainer>
+      </div>
+
+      <div className="chart-container">
+        <h2 className="chart-title">Needs Trend</h2>
+        <ResponsiveContainer width="100%" height={300}>
+          <LineChart data={needsData}>
+            <XAxis dataKey="date" stroke="#047857" />
+            <YAxis stroke="#047857" />
+            <CartesianGrid strokeDasharray="3 3" />
+            <Tooltip contentStyle={{ backgroundColor: '#f0fdf4', border: '1px solid #047857' }} />
+            <Legend />
+            <Line type="monotone" dataKey="needs" name="Needs" stroke="#6A65F2" strokeWidth={2} dot={{ fill: '#6A65F2', strokeWidth: 2 }} />
           </LineChart>
         </ResponsiveContainer>
       </div>

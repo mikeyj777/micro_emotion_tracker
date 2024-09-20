@@ -1,7 +1,7 @@
 from flask import Flask
 from controllers.user_controller import get_user
 from controllers.emotion_controller import get_emotions, create_emotion
-from controllers.need_controller import create_need
+from controllers.need_controller import get_needs, create_need
 from flask_cors import CORS
 
 from controllers.data_controller import check_existing_data
@@ -23,6 +23,10 @@ def user_route():
 @app.route('/api/emotions/<int:user_id>', methods=['GET'])
 def get_emotions_route(user_id):
     return get_emotions(user_id) 
+
+@app.route('/api/needs/<int:user_id>', methods=['GET'])
+def get_needs_route(user_id):
+    return get_needs(user_id) 
 
 @app.route('/api/emotions/<int:user_id>', methods=['POST'])
 def create_emotion_route(user_id):

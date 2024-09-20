@@ -142,6 +142,18 @@ body {
   margin-top: 2rem;
 }
 
+.stats-row {
+  margin: 1rem;
+}
+
+.chart-container {
+  margin: 0.5rem;
+}
+
+.dashboard-controls {
+  margin: 0.5rem;
+}
+
 /* Media Queries */
 @media (max-width: 768px) {
   .emotions-container {
@@ -163,4 +175,7 @@ body {
     width: 100%;
     margin-bottom: 0.5rem;
   }
+
+
+
 }

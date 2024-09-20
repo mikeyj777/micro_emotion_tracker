@@ -1,6 +1,49 @@
 from flask import request, jsonify
 from config.db import get_db_connection
 
+import logging
+
+logging.basicConfig(level=logging.DEBUG, format='%(asctime)s - %(levelname)s - %(message)s')
+
+def get_needs(user_id):
+    days = request.args.get('days', 7)
+    try:
+        conn = get_db_connection()
+        cur = conn.cursor()
+        logging.debug('about to execute needs query')
+        cur.execute("""
+            SELECT 
+                dl.date,
+                COUNT(dn.id) AS "needsCount"
+            FROM 
+                daily_logs dl
+            LEFT JOIN 
+                daily_needs dn ON dl.id = dn.daily_log_id
+            WHERE 
+                dl.user_id = %s
+            GROUP BY 
+                dl.date
+            ORDER BY 
+                dl.date DESC
+            LIMIT %s
+        """, (user_id, days))
+        needs = cur.fetchall()
+        cur.close()
+        conn.close()
+        logging.debug('got needs')
+        # Format the data for the React component
+        formatted_needs = []
+        for row in needs:
+            formatted_needs.append({
+                "date": row[0].strftime("%Y-%m-%d"),  # Format date as string
+                "needs": row[1],
+            })
+        logging.debug(f'needs: {formatted_needs}')
+
+        return jsonify(formatted_needs)
+    except Exception as e:
+        return jsonify({"error": "Internal server error"}), 500
+
 def create_need(user_id):
     data = request.get_json()
     needs = data['needs']
