@@ -17,7 +17,6 @@ CORS(app)
 
 @app.route('/api/users', methods=['POST'])
 def user_route():
-    logging.info('logged in')
     return get_user()
 
 @app.route('/api/emotions/<int:user_id>', methods=['GET'])

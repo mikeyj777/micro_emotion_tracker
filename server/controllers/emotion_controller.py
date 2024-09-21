@@ -39,7 +39,6 @@ def get_emotions(user_id):
 
         return jsonify(formatted_emotions)
     except Exception as e:
-        logging.error(f"Error in get_emotions: {str(e)}")
         return jsonify({"error": "Internal server error"}), 500
 
 def create_emotion(user_id):

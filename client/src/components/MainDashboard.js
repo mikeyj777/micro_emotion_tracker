@@ -84,8 +84,8 @@ function MainDashboard() {
             <CartesianGrid strokeDasharray="3 3" />
             <Tooltip contentStyle={{ backgroundColor: '#f0fdf4', border: '1px solid #047857' }} />
             <Legend />
-            <Line type="monotone" dataKey="positiveCount" name="Positive" stroke="#E8489C" strokeWidth={2} dot={{ fill: '#E8489C', strokeWidth: 2 }} />
-            <Line type="monotone" dataKey="negativeCount" name="Negative" stroke="#6A65F2" strokeWidth={2} dot={{ fill: '#6A65F2', strokeWidth: 2 }} />
+            <Line type="monotone" dataKey="positiveCount" name="Positive" stroke="#6A65F2" strokeWidth={2} dot={{ fill: '#6A65F2', strokeWidth: 2 }} />
+            <Line type="monotone" dataKey="negativeCount" name="Negative" stroke="#E8489C" strokeWidth={2} dot={{ fill: '#E8489C', strokeWidth: 2 }} />
           </LineChart>
         </ResponsiveContainer>
       </div>
