@@ -10,7 +10,6 @@ def get_needs(user_id):
     try:
         conn = get_db_connection()
         cur = conn.cursor()
-        logging.debug('about to execute needs query')
         cur.execute("""
             SELECT 
                 dl.date,
@@ -30,7 +29,6 @@ def get_needs(user_id):
         needs = cur.fetchall()
         cur.close()
         conn.close()
-        logging.debug('got needs')
         # Format the data for the React component
         formatted_needs = []
         for row in needs:
@@ -38,8 +36,7 @@ def get_needs(user_id):
                 "date": row[0].strftime("%Y-%m-%d"),  # Format date as string
                 "needs": row[1],
             })
-        logging.debug(f'needs: {formatted_needs}')
-
+        
         return jsonify(formatted_needs)
     except Exception as e:
         return jsonify({"error": "Internal server error"}), 500
