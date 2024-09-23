@@ -4,8 +4,6 @@ import csv
 
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
-from config.db import get_db_connection
-
 import csv
 from config.db import get_db_connection
 

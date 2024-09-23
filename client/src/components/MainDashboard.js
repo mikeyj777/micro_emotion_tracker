@@ -26,8 +26,11 @@ function MainDashboard() {
     
     const fetchData = async () => {
       try {
+        console.log('about to fetch emotion data')
         const res = await axios.get(`${API_BASE_URL}/api/emotions/${userId}?days=${daysToView}`);
+        console.log('got emotion data: ' + res.data)
         setEmotionData(res.data);
+
       } catch (err) {
         console.error(err);
       }

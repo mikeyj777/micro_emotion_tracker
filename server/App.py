@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, jsonify
 from controllers.user_controller import get_user
 from controllers.emotion_controller import get_emotions, create_emotion
 from controllers.need_controller import get_needs, create_need
@@ -17,6 +17,7 @@ CORS(app)
 
 @app.route('/api/users', methods=['POST'])
 def user_route():
+    logging.debug('getting user')
     return get_user()
 
 @app.route('/api/emotions/<int:user_id>', methods=['GET'])
@@ -41,7 +42,7 @@ def check_existing_data_route(user_id):
 
 @app.route("/")
 def home():
-    return
+    return jsonify({"message": "Welcome to the Mindful Moments API"})
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run("0.0.0.0", debug=False)

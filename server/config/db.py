@@ -2,18 +2,20 @@ import os
 import psycopg2
 from urllib.parse import urlparse
 
-from data.pwds import Pwds
+import logging
+
+# Configure logging
+logging.basicConfig(level=logging.DEBUG, format='%(asctime)s - %(levelname)s - %(message)s')
 
 def get_db_connection():
-    if 'DATABASE_URL' in os.environ:
-        # Running on Heroku
-        url = urlparse(os.environ['DATABASE_URL'])
+    if 'DB_PASSWORD' in os.environ:
+        pwd = os.environ['DB_PASSWORD']
         conn = psycopg2.connect(
-            host=url.hostname,
-            database=url.path[1:],
-            user=url.username,
-            password=url.password,
-            port=url.port
+            host="localhost",
+            database="postgres",
+            user="postgres",
+            password=pwd,
+            port="5432"
         )
     else:
         # Local development
