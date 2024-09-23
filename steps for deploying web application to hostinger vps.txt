@@ -1,0 +1,66 @@
+steps for web application
+
+0.  Get a VPS.  I used Debian 12 for the below example.  connect to the VPS using ssh@IP.
+1.  follow https://www.youtube.com/watch?v=BpcK5jON6Cg for setup for flask application.
+2.  at around 4 min, they will fill out a config file for nginx.  replace this with the following.  the below will allow the setup to work for both the frontend (react) and backend (flask)
+
+server {
+    listen 80;
+    server_name localhost;
+
+    root /var/www/mindful_moments_frontend; # path to react build files
+    index index.html;
+
+    location / {
+        try_files $uri $uri/ /index.html;
+    }
+
+    location /api {
+        proxy_pass http://127.0.0.1:8000;  # Assuming Flask runs on port 8000
+        proxy_set_header Host $host;
+        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+    }
+
+    location /static {
+        alias /var/www/mindful_moments_frontend/static;
+    }
+}
+
+
+note - the video shows to create this file in sites-enabled.  I was following this video and claude ai at the same time.  claude had instructed to store this config to sites-allowed and to do the sybmolic linking sudo ln -s /etc/nginx/sites-available/your-app-name /etc/nginx/sites-enabled/.
+
+I think I got these confused and added a ton of extra work trying to get it right.  my bet is that creating the above file in /etc/nginx/sites-enabled/ skips the need for linking.
+
+3.  remove the default nginx config:  unlink /etc/nginx/sites-enabled/default
+
+4.  copy your flask app to a folder in the root directory of the server.
+
+4.1.  to copy the files, I used FileZilla.  
+sftp://[IP for VPS]  
+user name:  root
+password is the root password configured during server setup.  
+port:  22.
+
+5.  run npm build on the react project folder on your local machine to create an optimized build.  use SFTP to copy the contents of the build folder to the server in /var/www/[project_folder].  
+
+6.  if using postgres, do all of your sql work under postgres user:  sudo -u postgres psql
+
+7.  remember to populate any sql data tables if they need source data
+
+8.  navigate to the flask app folder on the server (under root)
+
+9.  the flask app will be run with gunicorn3. be sure the "app.py" file is named with all lower case.  you can use the logging feature to track any calls to the flask server:  gunicorn3 --workers=3 app:app --log-level debug
+
+10.  if needed, kill gunicorn with the following command:  sudo pkill -f gunicorn3.  
+
+11.  once the calls to gunicorn look ok and you're ready to have it run as as service load it using the daemon parameter:  gunicorn3 --workers=3 app:app --log-level debug --daemon --log-file=/path/to/your/logfile.log
+
+the above will store a logfile at the specified path.
+
+12.  if all runs ok, this will have the front end and back end running on the VPS.  
+
+13.  to connect a shared hosting site (e.g. from Hostinger), go to the web site manager and get to the DNS records page.  Hostinger: "DNS Zone Editor" in Advanced.
+
+14.  Enter an "A" record with the target sub-domain name as the name field.  No quotes or starting @ or anything.  just the subdomain name.  the remaining fields can be left as default.  Add the record.
+
+15.  test that the subdomain works.

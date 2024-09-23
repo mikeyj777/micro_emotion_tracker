@@ -11,9 +11,6 @@ def parse_emotions_csv(file_path, is_positive):
     conn = get_db_connection()
     cur = conn.cursor()
 
-    # Clear all records from the emotions table
-    cur.execute("DELETE FROM emotions")
-
     with open(file_path, 'r') as file:
         reader = csv.DictReader(file)
         for row in reader:
@@ -29,6 +26,14 @@ def parse_emotions_csv(file_path, is_positive):
     conn.close()
 
 if __name__ == '__main__':
+    conn = get_db_connection()
+    cur = conn.cursor()
+
+    # Clear all records from the emotions table
+    cur.execute("DELETE FROM emotions")
+    conn.commit()
+    cur.close()
+    conn.close()
     data_type = ['positive', 'negative']
     is_positive = True
     for data in data_type:
