@@ -13,7 +13,7 @@ logging.basicConfig(level=logging.DEBUG, format='%(asctime)s - %(levelname)s - %
 
 
 app = Flask(__name__)
-CORS(app)
+CORS(app, resources={r"/*": {"origins": ["http://feels.riskspace.net", "localhost:3000"]}})
 
 @app.route('/api/users', methods=['POST'])
 def user_route():

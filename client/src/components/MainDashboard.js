@@ -26,9 +26,7 @@ function MainDashboard() {
     
     const fetchData = async () => {
       try {
-        console.log('about to fetch emotion data')
         const res = await axios.get(`${API_BASE_URL}/api/emotions/${userId}?days=${daysToView}`);
-        console.log('got emotion data: ' + res.data)
         setEmotionData(res.data);
 
       } catch (err) {
@@ -41,9 +39,7 @@ function MainDashboard() {
   useEffect(() => {
     const fetchData = async () => {
     try {
-      console.log('about to fetch needs data')
       const res = await axios.get(`${API_BASE_URL}/api/needs/${userId}?days=${daysToView}`);
-      console.log('got needs data: ' + res.data)
       setNeedsData(res.data);
     } catch (err) {
       console.error(err);
@@ -70,7 +66,7 @@ function MainDashboard() {
       <div className="gradient-layout-content">
         <h1 className="gradient-layout-title">Mindful Moments</h1>
         <p className="gradient-layout-subtitle">Your daily path to emotional well-being</p>
-        <button onClick={handleTrackNewDay} className="button button-primary">Start Your Journey</button>
+        <button onClick={handleTrackNewDay} className="button button-primary">Please Start Your Journey by Clicking Here</button>
       
       <div className="stats-row">
         <StatCard title="Total Emotions" value={totalEmotions} icon={() => <span className="icon">📊</span>} />
@@ -110,7 +106,7 @@ function MainDashboard() {
       <div className="dashboard-controls">
         {/* <button onClick={handleTrackNewDay} className="button button-primary"> */}
         <button onClick={handleReturnToLogin} className="button button-primary">
-          Login Again
+          Logout
         </button>
         <div className="days-input">
           <span className="days-label">Days to view:</span>
@@ -118,7 +114,7 @@ function MainDashboard() {
             type="number"
             value={daysToView}
             onChange={(e) => setDaysToView(e.target.value)}
-            className="days-input-field"
+            className="input-field"
           />
         </div>
       </div>

@@ -64,7 +64,7 @@ function PositiveEmotions() {
         <div className="emotions-header">
           <h1 className="gradient-layout-title">Mindful Moments</h1>
           <h2 className="gradient-layout-subtitle">Positive Emotions</h2>
-          <p className="subtitle">Select the positive emotions you experienced today</p>
+          <p className="subtitle">Select the positive emotions you're experiencing today.</p>
         </div>
 
         <div className="emotions-container">

@@ -7,6 +7,8 @@ import logging
 # Configure logging
 logging.basicConfig(level=logging.DEBUG, format='%(asctime)s - %(levelname)s - %(message)s')
 
+logging.debug(f"connecting to db. environ var for password exists:  {'DB_PASSWORD' in os.environ}")
+
 def get_db_connection():
     if 'DB_PASSWORD' in os.environ:
         pwd = os.environ['DB_PASSWORD']

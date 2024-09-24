@@ -12,10 +12,10 @@ function Login() {
     e.preventDefault();
     try {
       if (!name) {
-        console.log('Please enter a name');
         return;
       } 
-        
+      console.log("logging in.  url is " + API_BASE_URL)
+      console.log("full url as interpreted by react is " + `${API_BASE_URL}/api/users`)
       const res = await axios.post(`${API_BASE_URL}/api/users`, { name });
       const userId = res.data.userId;
       localStorage.setItem('userId', userId);

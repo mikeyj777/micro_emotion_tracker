@@ -3,3 +3,4 @@ venv
 *.pyc
 *.env
 hostinger_vps.txt
+node_modules

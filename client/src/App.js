@@ -7,7 +7,6 @@ import TrackNewDay from './components/TrackNewDay';
 import PositiveEmotions from './components/PositiveEmotions';
 import NegativeEmotions from './components/NegativeEmotions';
 import Needs from './components/Needs';
-import GridTest from './components/GridTest';
 import './styles/App.css';
 
 function App() {
@@ -20,7 +19,6 @@ function App() {
         <Route path="/positive-emotions" element={<PositiveEmotions />} />
         <Route path="/negative-emotions" element={<NegativeEmotions />} />
         <Route path="/needs" element={<Needs />} />
-        <Route path="/grid-test" element={<GridTest />} />
       </Routes>
     </Router>
   );

@@ -47,9 +47,9 @@ function TrackNewDay() {
             </div>
           )}
           <div className="button-container">
-            <button onClick={handleFeelings} className="button button-primary">Log Feelings</button>
-            <button onClick={handleNeeds} className="button button-secondary">Log Needs</button>
-            <button onClick={handleHome} className="button button-secondary">Go Home</button>
+            <button onClick={handleFeelings} className="button button-primary">First thing, let's check in on feelings</button>
+            <button onClick={handleNeeds} className="button button-next">Next, let's check on needs</button>
+            <button onClick={handleHome} className="button button-next">When we're done checking in, click here see your updated dashboard</button>
           </div>
         </div>
       

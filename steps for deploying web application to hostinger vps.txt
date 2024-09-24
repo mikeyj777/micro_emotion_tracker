@@ -63,4 +63,6 @@ the above will store a logfile at the specified path.
 
 14.  Enter an "A" record with the target sub-domain name as the name field.  No quotes or starting @ or anything.  just the subdomain name.  the remaining fields can be left as default.  Add the record.
 
-15.  test that the subdomain works.
+15.  set up the CORS endpoints in app.py on the server.
+
+16.  test that the subdomain works.
